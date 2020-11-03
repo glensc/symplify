@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+use Rector\Autodiscovery\Rector\FileNode\MoveEntitiesToEntityDirectoryRector;
+use Rector\Autodiscovery\Rector\FileNode\MoveInterfacesToContractNamespaceDirectoryRector;
+use Rector\Autodiscovery\Rector\FileNode\MoveServicesBySuffixToDirectoryRector;
+use Rector\Autodiscovery\Rector\FileNode\MoveValueObjectsToValueObjectDirectoryRector;
 use Rector\Core\Configuration\Option;
 use Rector\Naming\Rector\ClassMethod\MakeIsserClassMethodNameStartWithIsRector;
 use Rector\Naming\Rector\Property\MakeBoolPropertyRespectIsHasWasMethodNamingRector;
@@ -27,6 +31,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 'Doctrine\ORM\EntityManager',
             ]
         ]]);
+
+    $services->set(MoveEntitiesToEntityDirectoryRector::class);
+    $services->set(MoveInterfacesToContractNamespaceDirectoryRector::class);
+    $services->set(MoveServicesBySuffixToDirectoryRector::class);
+    $services->set(MoveValueObjectsToValueObjectDirectoryRector::class);
 
     $parameters = $containerConfigurator->parameters();
 
